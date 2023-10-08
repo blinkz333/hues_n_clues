@@ -1,21 +1,40 @@
 import React, { useState } from "react";
 import Create_Player_Img from "../assets/img/lionel-messi-tony-slark-v0-2b8c2nud3oo81.jpg";
+import { colors } from "../assets/json/color";
+
+import DraggableSquare from "./DraggableSquare";
 
 const Main = () => {
   const [players, setPlayers] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalPositionOpen, setModalPositionOpen] = useState(false);
+  const [selectPlayer, setSelectPlayer] = useState();
+  const [column, setColumn] = useState("");
+  const [row, setRow] = useState("");
+
   const [newPlayer, setNewPlayer] = useState({
     name: "",
     color: "",
     points: 0,
+    column: null,
+    row: null,
   });
 
   const openModal = () => {
     if (players.length === 10) {
-      alert("Player is Full !!!");
+      alert("Player list is full!");
     } else {
       setModalOpen(true);
     }
+  };
+
+  const openPositionModal = (index) => {
+    setSelectPlayer(index);
+    setModalPositionOpen(true);
+  };
+
+  const closePositionModal = () => {
+    setModalPositionOpen(false);
   };
 
   const closeModal = () => {
@@ -30,11 +49,28 @@ const Main = () => {
     }));
   };
 
+  const handleAddColumn = (e) => {
+    const { value } = e.target;
+
+    setColumn(value.toUpperCase());
+  };
+
+  const handleAddRow = (e) => {
+    const { value } = e.target;
+    setRow(value);
+  };
+
   const addPlayer = () => {
     if (newPlayer.name && newPlayer.color) {
       if (players.length < 10) {
         setPlayers([...players, newPlayer]);
-        setNewPlayer({ name: "", color: "#FFFFFF", points: 0 });
+        setNewPlayer({
+          name: "",
+          color: "#FFFFFF",
+          points: 0,
+          column: null,
+          row: null,
+        });
         closeModal();
       } else {
         alert("Maximum of 10 players reached.");
@@ -55,78 +91,29 @@ const Main = () => {
     setPlayers(updatedPlayers);
   };
 
+  const setPositionForPlayer = (playerIndex, newColumn, newRow) => {
+    const updatedPlayers = [...players];
+    updatedPlayers[playerIndex].column = newColumn;
+    updatedPlayers[playerIndex].row = newRow;
+    setPlayers(updatedPlayers);
+  };
+
+  const addPosition = () => {
+    setPositionForPlayer(selectPlayer, column, row);
+    setModalPositionOpen(false);
+  };
+
+  const clearPlayerPosition = () => {
+    const updatedPlayers = players.map((player) => ({
+      ...player,
+      column: null,
+      row: null,
+    }));
+    setPlayers(updatedPlayers);
+  };
+
   const GridSquare = () => {
     const Grid = () => {
-      const colors = [
-        // A
-        "#612b10",
-        "#6b2811",
-        "#762117",
-        "#831d1b",
-        "#941e1d",
-        "#9d1b20",
-        "#b11e24",
-        "#c62028",
-        "#e21c26",
-        "#ee1b24",
-
-        "#ed1d24",
-        "#ef1c26",
-        "#ec1c2e",
-        "#ed1a3d",
-        "#eb1947",
-        "#ea1755",
-        "#e51465",
-        "#e21175",
-        "#d80f85",
-        "#d4138d",
-
-        "#c52891",
-        "#bb2d91",
-        "#b43196",
-        "#a83494",
-        "#a23794",
-        "#933995",
-        "#8c3d9a",
-        "#823d96",
-        "#7c3e99",
-        "#753f9c",
-
-        // B
-        "#884b20",
-        "#96431f",
-        "#9c3f1f",
-        "#ad3f25",
-        "#b93824",
-        "#c62c27",
-        "#da2628",
-        "#e51e26",
-        "#ee2225",
-        "#ee272a",
-
-        "#ef2933",
-        "#ed263c",
-        "#ee2044",
-        "#ee1e4e",
-        "#ed1b5e",
-        "#ef166f",
-        "#f00e7d",
-        "#ed0b8e",
-        "#db2a93",
-        "#cd3793",
-
-        "#be3e97",
-        "#b63c98",
-        "#a93d98",
-        "#a03d98",
-        "#963c98",
-        "#8f3c98",
-        "#833e9a",
-        "#7c3d9c",
-        "#723c98",
-        "#673b97",
-      ];
-
       const rows = Array.from({ length: 16 }, (_, rowIndex) => {
         const rowLabel = String.fromCharCode(65 + rowIndex);
 
@@ -138,16 +125,31 @@ const Main = () => {
             <div className="font-poppins text-xl font-bold text-white">
               {rowLabel}
             </div>
-            {Array.from({ length: 30 }, (_, colIndex) => (
-              <button onClick={() => alert(`${colIndex} , ${rowIndex}`)}>
+            {Array.from({ length: 30 }, (_, colIndex) => {
+              // Find the player in this cell
+              const player = players.find(
+                (player) =>
+                  player.column === rowLabel && player.row === `${colIndex + 1}`
+              );
+
+              return (
                 <div
                   key={colIndex}
-                  className="w-9 h-9 border border-gray-300"
-                  style={{ backgroundColor: colors[rowIndex * 30 + colIndex] }}
-                />
-              </button>
-            ))}
-            <div className="font-poppins text-xl font-bold  text-white">
+                  className="w-9 h-9 border border-black"
+                  style={{
+                    backgroundColor: colors[rowIndex * 30 + colIndex],
+                  }}
+                >
+                  {player && (
+                    <div
+                      className="h-5 w-5 border-2 border-black rounded-full mt-2 ml-2"
+                      style={{ backgroundColor: player ? player.color : "" }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+            <div className="font-poppins text-xl font-bold text-white">
               {rowLabel}
             </div>
           </div>
@@ -240,7 +242,7 @@ const Main = () => {
               <div className="flex-grow">
                 <div className="h-full">
                   <div className="p-4">
-                    <GridSquare />
+                    <GridSquare players={players} />
                   </div>
                 </div>
               </div>
@@ -298,6 +300,46 @@ const Main = () => {
               </div>
             )}
 
+            {modalPositionOpen && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-white w-1/3 p-4 rounded shadow-lg">
+                  <h2 className="text-2xl font-semibold mb-4">Add Position</h2>
+                  <div className="mb-4 flex">
+                    <input
+                      type="text"
+                      name="column"
+                      placeholder="Column (A-P)"
+                      value={newPlayer.column}
+                      onChange={handleAddColumn}
+                      className="w-full border border-gray-300 rounded px-3 py-2"
+                    />
+                    <input
+                      type="number"
+                      name="row"
+                      placeholder="Row (1-30)"
+                      value={newPlayer.row}
+                      onChange={handleAddRow}
+                      className="w-full border border-gray-300 rounded px-3 py-2"
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <button
+                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                      onClick={addPosition}
+                    >
+                      Add
+                    </button>
+                    <button
+                      className="bg-gray-300 text-gray-700 px-4 py-2 rounded ml-2"
+                      onClick={closePositionModal}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="mt-3">
               <div className="grid grid-cols-4 gap-2 mb-2">
                 <div className="col-span-4">
@@ -307,6 +349,12 @@ const Main = () => {
                       className="bg-blue-500 w-[80%] h-[50px] border-black border-2 text-white font-bold rounded-xl"
                     >
                       Add Player
+                    </button>
+                    <button
+                      onClick={() => clearPlayerPosition()}
+                      className="bg-blue-500 w-[80%] h-[50px] border-black border-2 text-white font-bold rounded-xl"
+                    >
+                      Clear Grid
                     </button>
                   </div>
                 </div>
@@ -322,10 +370,15 @@ const Main = () => {
                         className={`rounded-full h-8 w-8 flex items-center justify-center  border-2 border-black`}
                         style={{ backgroundColor: items.color }}
                       />
-                      <span
+                      <button
+                        onClick={() => openPositionModal(index)}
                         className={`rounded-full h-8 w-8 flex items-center justify-center  border-2 border-black`}
-                        style={{ backgroundColor: items.color }}
-                      />
+                        style={{ backgroundColor: "black" }}
+                      >
+                        <div className="text-white font-poppins font-bold">
+                          P
+                        </div>
+                      </button>
                     </div>
                   </div>
 
@@ -355,13 +408,20 @@ const Main = () => {
                 </div>
               ))}
             </div>
+
+            <div className="mt-7">
+              <DraggableSquare />
+            </div>
           </div>
           {/* Player Zone */}
         </div>
 
         <div className="bg-white rounded-xl">
-          <footer className="flex justify-center items-center font-poppins text-2xl">
-            &copy; Copyright 2023 | This game is Create By TonySlark
+          <footer className="flex justify-center items-center font-poppins text-xl">
+            This game is Create By TonySlark & Unigee Inspiration By
+            <a href="https://www.boardgamegeek.com/boardgame/302520/hues-and-cues">
+              boardgamegeek.com
+            </a>
           </footer>
         </div>
       </div>
