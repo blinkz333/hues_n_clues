@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Create_Player_Img from "../assets/img/lionel-messi-tony-slark-v0-2b8c2nud3oo81.jpg";
+import Create_Player_Img from "../assets/img/logo.PNG";
 import { colors } from "../assets/json/color";
 
 import DraggableSquare from "./DraggableSquare";
@@ -186,6 +186,182 @@ const Main = () => {
     );
   };
 
+  const Render_score = () => {
+    const clonedArray = JSON.parse(JSON.stringify(players));
+    return (
+      <>
+        {clonedArray
+          .sort((a, b) => b.points - a.points)
+          .map((player, index) => {
+            if (index === 0) {
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-600 rounded-lg w-520 border-2 border-gray-800"
+                >
+                  <div className="flex justify-center items-center text-white font-bold text-2xl font-poppins p-2">
+                    <div>{`${player.name} : ${player.points} Point(s)`}</div>
+                    <div>
+                      <svg
+                        height="20px"
+                        width="20px"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 300.439 300.439"
+                        xmlSpace="preserve"
+                        fill="#000000"
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <path
+                              style={{ fill: "#BF392C" }}
+                              d="M276.967,0h-84.498L70.415,178.385h84.498L276.967,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#E2574C" }}
+                              d="M23.472,0h84.498l122.053,178.385h-84.498L23.472,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#EFC75E" }}
+                              d="M154.914,93.887c57.271,0,103.276,46.005,103.276,103.276s-46.005,103.276-103.276,103.276 S51.638,254.434,51.638,197.163S97.643,93.887,154.914,93.887z"
+                            ></path>
+                            <path
+                              style={{ fill: "#D7B354" }}
+                              d="M154.914,122.053c-41.31,0-75.11,33.799-75.11,75.11s33.799,75.11,75.11,75.11 s75.11-33.799,75.11-75.11S196.224,122.053,154.914,122.053z M154.914,253.495c-30.983,0-56.332-25.35-56.332-56.332 s25.35-56.332,56.332-56.332s56.332,25.35,56.332,56.332S185.896,253.495,154.914,253.495z"
+                            ></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              );
+            } else if (index === 1) {
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-600 rounded-lg w-520 border-2 border-gray-800"
+                >
+                  <div className="flex justify-center items-center text-white font-bold text-2xl font-poppins p-2">
+                    <div>{`${player.name} : ${player.points} Point(s)`}</div>
+                    <div>
+                      <svg
+                        height="20px"
+                        width="20px"
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 300.439 300.439"
+                        xmlSpace="preserve"
+                        fill="#000000"
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <path
+                              style={{ fill: "#BF392C" }}
+                              d="M276.967,0h-84.498L70.415,178.385h84.498L276.967,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#E2574C" }}
+                              d="M23.472,0h84.498l122.053,178.385h-84.498L23.472,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#E4E7E7" }}
+                              d="M154.914,93.887c57.271,0,103.276,46.005,103.276,103.276s-46.005,103.276-103.276,103.276 S51.638,254.434,51.638,197.163S97.643,93.887,154.914,93.887z"
+                            ></path>
+                            <path
+                              style={{ fill: "#CDCFCF" }}
+                              d="M154.914,122.053c-41.31,0-75.11,33.799-75.11,75.11s33.799,75.11,75.11,75.11 s75.11-33.799,75.11-75.11S196.224,122.053,154.914,122.053z M154.914,253.495c-30.983,0-56.332-25.35-56.332-56.332 s25.35-56.332,56.332-56.332s56.332,25.35,56.332,56.332S185.896,253.495,154.914,253.495z"
+                            ></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              );
+            } else if (index === 2) {
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-600 rounded-lg w-520 border-2 border-gray-800"
+                >
+                  <div className="flex justify-center items-center text-white font-bold text-2xl font-poppins p-2">
+                    <div>{`${player.name} : ${player.points} Point(s)`}</div>
+                    <div>
+                      <svg
+                        height="20px"
+                        width="20px"
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 300.439 300.439"
+                        xmlSpace="preserve"
+                        fill="#000000"
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <path
+                              style={{ fill: "#BF392C" }}
+                              d="M276.967,0h-84.498L70.415,178.385h84.498L276.967,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#E2574C" }}
+                              d="M23.472,0h84.498l122.053,178.385h-84.498L23.472,0z"
+                            ></path>
+                            <path
+                              style={{ fill: "#ED9D5D" }}
+                              d="M154.914,93.887c57.271,0,103.276,46.005,103.276,103.276s-46.005,103.276-103.276,103.276 S51.638,254.434,51.638,197.163S97.643,93.887,154.914,93.887z"
+                            ></path>
+                            <path
+                              style={{ fill: "#D58D54" }}
+                              d="M154.914,122.053c-41.31,0-75.11,33.799-75.11,75.11s33.799,75.11,75.11,75.11 s75.11-33.799,75.11-75.11S196.224,122.053,154.914,122.053z M154.914,253.495c-30.983,0-56.332-25.35-56.332-56.332 s25.35-56.332,56.332-56.332s56.332,25.35,56.332,56.332S185.896,253.495,154.914,253.495z"
+                            ></path>
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-600 rounded-lg w-520 border-2 border-gray-800"
+                >
+                  <div className="flex justify-center items-center text-white font-bold text-2xl font-poppins p-2">
+                    <div>{`${player.name} : ${player.points} Point(s)`}</div>
+                  </div>
+                </div>
+              );
+            }
+          })}
+      </>
+    );
+  };
+
   return (
     <>
       <div className="bg-black min-h-screen">
@@ -193,7 +369,7 @@ const Main = () => {
           <div className="col-span-5 my-3">
             <div className="h-screen flex flex-col">
               <div className="h-36">
-                {/* Scroll results */}
+                {/* Scoare results */}
                 <div className=" h-full grid grid-cols-8">
                   <div className="col-span-7">
                     <div className="p-5">
@@ -210,16 +386,7 @@ const Main = () => {
                           </>
                         ) : (
                           <>
-                            {players.map((items, index) => (
-                              <div
-                                key={index}
-                                className="bg-gray-600 rounded-lg w-520 border-2 border-gray-800"
-                              >
-                                <div className="flex justify-center items-center text-white font-bold text-2xl font-poppins p-2">
-                                  <div>{`${items.name} : ${items.points} Point(s)`}</div>
-                                </div>
-                              </div>
-                            ))}
+                            <Render_score />
                           </>
                         )}
                       </div>
@@ -237,7 +404,7 @@ const Main = () => {
                     </div>
                   </div>
                 </div>
-                {/* Scroll results */}
+                {/* Scoare results */}
               </div>
               <div className="flex-grow">
                 <div className="h-full">
@@ -250,7 +417,7 @@ const Main = () => {
           </div>
 
           {/* Player Zone */}
-          <div className="bg-white rounded-3xl col-span-1 my-3">
+          <div className="bg-white rounded-3xl col-span-1 my-3 mr-3">
             <div className="p-5 border-gray-300 rounded-xl bg-[#fbe79c] mt-10">
               <div className="flex items-center justify-center">
                 <div className="text-4xl font-bold font-poppins tracking-wide">
@@ -343,16 +510,16 @@ const Main = () => {
             <div className="mt-3">
               <div className="grid grid-cols-4 gap-2 mb-2">
                 <div className="col-span-4">
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center space-x-1 ml-2 mr-2">
                     <button
                       onClick={() => openModal()}
-                      className="bg-blue-500 w-[80%] h-[50px] border-black border-2 text-white font-bold rounded-xl"
+                      className="bg-blue-500 w-[60%] h-[40px] border-black border-2 text-white font-bold rounded-xl hover:bg-blue-600 transition duration-300 "
                     >
                       Add Player
                     </button>
                     <button
                       onClick={() => clearPlayerPosition()}
-                      className="bg-blue-500 w-[80%] h-[50px] border-black border-2 text-white font-bold rounded-xl"
+                      className="bg-red-400 w-[60%] h-[40px] border-black border-2 text-white font-bold rounded-xl hover:bg-blue-600 transition duration-300 "
                     >
                       Clear Grid
                     </button>
