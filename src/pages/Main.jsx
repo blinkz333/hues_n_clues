@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Create_Player_Img from "../assets/img/logo.PNG";
+import Create_Player_Img from "../assets/img/logo3.PNG";
 import { colors } from "../assets/json/color";
 
 import DraggableSquare from "./DraggableSquare";
