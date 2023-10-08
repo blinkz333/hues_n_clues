@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function DraggableSquare() {
   const [position, setPosition] = useState({
-    x: window.innerWidth - 230,
+    x: window.innerWidth - 480,
     y: window.innerHeight - 160,
   });
   const [isDragging, setIsDragging] = useState(false);
@@ -31,7 +31,7 @@ function DraggableSquare() {
 
   return (
     <div
-      className={`w-32 h-32 border-[4px] border-gray-600 absolute cursor-move transition-transform duration-200 ${
+      className={`w-32 h-32 border-[4px] border-white absolute cursor-move transition-transform duration-200 ${
         isDragging ? "scale-105" : ""
       }`}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
